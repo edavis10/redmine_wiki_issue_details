@@ -12,8 +12,8 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
 
   Redmine::WikiFormatting::Macros.register do
     desc "Display an issue and it's details.  Examples:\n\n" +
-      "  !{{issue_details(100)}} -- details about Issue # 100\n" + 
-      "  !{{issue_details(103)}} -- details about Issue # 103\n"
+      "  !{{issue_details(100)}}\n\n" +
+      "  Digitized 24 hour firmware - Bug #391 Robust disintermediate customer loyalty - 25.23 hours"
     macro :issue_details do |obj, args|
       issue_id = args[0]
       issue = Issue.visible.find_by_id(issue_id)
