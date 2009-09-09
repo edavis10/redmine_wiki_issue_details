@@ -21,7 +21,11 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
       return '' unless issue
 
       if User.current.allowed_to?(:view_estimates, issue.project)
-        estimates = "- #{l_hours(issue.estimated_hours)}"
+        if issue.estimated_hours && issue.estimated_hours > 0
+          estimates = "- #{l_hours(issue.estimated_hours)}"
+        else
+          estimates = "- <strong>needs estimate</strong>"
+        end
       else
         estimates = ''
       end
