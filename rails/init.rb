@@ -32,7 +32,15 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
 
       project_link = link_to(h(issue.project), :controller => 'projects', :action => 'show', :id => issue.project)
         
-      return "#{project_link} - #{link_to_issue(issue)} #{h(issue.subject)} #{estimates}"
+      returning '' do |response|
+        response << '<span style="text-decoration: line-through;">' if issue.closed?
+        response << project_link
+        response << ' - '
+        response << link_to_issue(issue) + ' '
+        response << estimates + ' '
+        response << "(#{h(issue.status)})"
+        response << '</span>' if issue.closed?
+      end
     end
   end
 end
