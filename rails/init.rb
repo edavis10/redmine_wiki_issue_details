@@ -20,14 +20,14 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
 
       return '' unless issue
 
-      if User.current.allowed_to?(:view_estimates, issue.project)
-        if issue.estimated_hours && issue.estimated_hours > 0
-          estimates = "- #{l_hours(issue.estimated_hours)}"
-        else
-          estimates = "- <strong>needs estimate</strong>"
-        end
-      else
+      if Redmine::AccessControl.permission(:view_estimates) && !User.current.allowed_to?(:view_estimates, issue.project)
+        # Check if the view_estimates permission is defined and the user
+        # is allowed to view the estimate
         estimates = ''
+      elsif issue.estimated_hours && issue.estimated_hours > 0
+        estimates = "- #{l_hours(issue.estimated_hours)}"
+      else
+        estimates = "- <strong>needs estimate</strong>"
       end
 
       project_link = link_to(h(issue.project), :controller => 'projects', :action => 'show', :id => issue.project)
