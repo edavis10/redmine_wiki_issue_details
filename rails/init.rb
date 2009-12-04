@@ -1,5 +1,26 @@
 require 'redmine'
 
+# Redmine 0.8.x patches
+module RedmineWikiIssueDetails
+  module IssueCompatibilityPatch
+    def self.included(base)
+      base.class_eval do
+        named_scope :visible, lambda {|*args| { :include => :project,
+            :conditions => Project.allowed_to_condition(args.first || User.current, :view_issues) } }
+      end
+    end
+  end
+end
+
+# Patches to the Redmine core.
+require 'dispatcher'
+
+Dispatcher.to_prepare :redmine_wiki_issue_details do
+  require_dependency 'issue'
+  Issue.send(:include, RedmineWikiIssueDetails::IssueCompatibilityPatch) unless Issue.respond_to? :visible
+end
+
+
 Redmine::Plugin.register :redmine_wiki_issue_details do
   name 'Redmine Wiki Issue Details plugin'
   author 'Eric Davis'
@@ -7,7 +28,7 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
   author_url 'http://www.littlestreamsoftware.com'
   description 'This plugin adds a wiki macro to make it easier to list the details of issues on a wiki page.'
   version '0.0.1'
-  requires_redmine :version_or_higher => '0.8.4' # Only tested on trunk
+  requires_redmine :version_or_higher => '0.8.0'
 
 
   Redmine::WikiFormatting::Macros.register do
