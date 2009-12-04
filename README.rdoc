@@ -16,7 +16,7 @@ A copy of the plugin can be downloaded from {Little Stream Software}[https://pro
 
 Insert the +{{issue_details}}+ macro onto the wiki pages.  It requires the issue id parameter (e.g. +{{issue_details(100)}}+).  When printed, an issue will look like:
 
-    Digitized 24 hour firmware - Bug #391 Robust disintermediate customer loyalty - 25.23 hours
+    Digitized 24 hour firmware - Bug #391 Robust disintermediate customer loyalty - 25.23 hours (In Progress)
 
 Where "Digitized 24 hour firmware" is a link to the project, "Robust disintermediate customer loyalty" is issue #391, and "25.23 hours" is the estimated time.
 
