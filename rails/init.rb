@@ -27,7 +27,7 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
   url 'https://projects.littlestreamsoftware.com/projects/redmine-misc'
   author_url 'http://www.littlestreamsoftware.com'
   description 'This plugin adds a wiki macro to make it easier to list the details of issues on a wiki page.'
-  version '0.0.1'
+  version '0.1.0'
   requires_redmine :version_or_higher => '0.8.0'
 
 
