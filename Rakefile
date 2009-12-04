@@ -13,10 +13,10 @@ begin
     s.name = "redmine_wiki_issue_details"
     s.summary = "This plugin adds a wiki macro to make it easier to list the details of issues on a wiki page."
     s.email = "edavis@littlestreamsoftware.com"
-    s.homepage = "https://projects.littlestreamsoftware.com/projects/TODO"
+    s.homepage = "https://projects.littlestreamsoftware.com/projects/redmine-misc"
     s.description = "This plugin adds a wiki macro to make it easier to list the details of issues on a wiki page."
     s.authors = ["Eric Davis"]
-    s.rubyforge_project = "redmine_wiki_issue_details" # TODO
+    s.rubyforge_project = "littlestream"
     s.files =  FileList[
                         "[A-Z]*",
                         "init.rb",
@@ -27,7 +27,7 @@ begin
   end
   Jeweler::GemcutterTasks.new
   Jeweler::RubyforgeTasks.new do |rubyforge|
-    rubyforge.doc_task = "rdoc"
+    rubyforge.doc_task = "doc"
   end
 rescue LoadError
   puts "Jeweler, or one of its dependencies, is not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
