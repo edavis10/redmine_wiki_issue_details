@@ -48,7 +48,7 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
       elsif issue.estimated_hours && issue.estimated_hours > 0
         estimates = "- #{l_hours(issue.estimated_hours)}"
       else
-        estimates = "- <strong>needs estimate</strong>"
+        estimates = "- <strong>#{l(:redmine_wiki_issue_details_text_needs_estimate)}</strong>"
       end
 
       project_link = link_to(h(issue.project), :controller => 'projects', :action => 'show', :id => issue.project)
