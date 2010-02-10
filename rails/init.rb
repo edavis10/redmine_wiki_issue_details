@@ -30,6 +30,25 @@ Redmine::Plugin.register :redmine_wiki_issue_details do
   version '0.1.0'
   requires_redmine :version_or_higher => '0.8.0'
 
+  Redmine::WikiFormatting::Macros.register do
+    desc "Display a list of issues.  Examples:\n\n" +
+         "!{{issue_list(100,101)}}\n\n" +
+         "<ul><li>Issue subject - Task #100 (Assignee)</li><li>Some Other Issue - Bug #101 (Assignee)</li></ul>"
+    macro :issue_list do |obj,args|
+	 ret = '<ul>'
+         args.each {|id|
+	    issue = Issue.visible.find_by_id(id)
+	    if issue
+                assigned="Unassigned"
+		if issue.assigned_to_id
+		    assigned=issue.assigned_to.name
+		end
+		ret += "<li>#{link_to_issue(issue)} (#{assigned})</li>"	
+	    end	
+  	 }
+	 ret += '</ul>'
+    end
+  end
 
   Redmine::WikiFormatting::Macros.register do
     desc "Display an issue and it's details.  Examples:\n\n" +
